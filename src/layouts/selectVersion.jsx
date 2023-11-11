@@ -9,7 +9,7 @@ const SelectVersionFlow = () => {
   const dispatch = useDispatch();
   const [formValue, setFormValue] = useState({ searchValue: '' });
 
-  const { data, loading } = useSelector((state) => state.bibleReducer);
+  const { data, loading, status } = useSelector((state) => state.bibleReducer);
 
   useEffect(() => {
     dispatch(fetchBible())
@@ -27,6 +27,8 @@ const SelectVersionFlow = () => {
       dispatch(getFormValue(
         toLowerCaseText,
       ));
+    } else {
+      dispatch(fetchBible());
     }
     setFormValue({ searchValue: '' });
   };
@@ -44,6 +46,7 @@ const SelectVersionFlow = () => {
         <form onSubmit={getValue} className='search'>
           <input type="search" role="search" name="searchValue" placeholder="Search bible, pages, verses... " onChange={handleChange} />
         </form>
+        <p>{status}</p>
         <div className="rows">
           {data.map((items) => (<SelectVersion key={items.id} id={items.id} name={items.name} language={items.language.name} abbreviationLocal={items.abbreviationLocal}></SelectVersion>))}
         </div>

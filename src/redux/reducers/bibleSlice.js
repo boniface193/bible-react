@@ -10,17 +10,16 @@ const bibleSlice = createSlice({
   name: 'getBible',
   initialState: {
     data: [],
-    status: 'idle',
+    status: '',
     loading: true,
   },
   reducers: {
     getFormValue: (state, { payload }) => {
       try {
-        state.data = state.data.filter((item) => {
-          if (item.name.indexOf(payload) > -1 && item.abbreviation.indexOf(payload) > -1) {
-            return item.name
-          }
-        });
+        state.data = state.data.filter((item) => item.name.toLowerCase().indexOf(payload) > -1);
+        if (state.data.length < 1) {
+          state.status = 'Ops! Nothing'
+        }
       } catch (error) {
         state.error = error
       }
@@ -29,10 +28,10 @@ const bibleSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchBible.pending, (state) => {
-        state.status = 'loading';
+        state.status = ''
+        state.loading = true;
       })
       .addCase(fetchBible.fulfilled, (state, { payload }) => {
-        state.status = 'succeeded';
         state.data = payload.data;
         state.loading = false;
       })
