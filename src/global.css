@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.containers {
+  @apply w-screen bg-slate-200 dark:bg-slate-900 h-screen sm:flex items-center pt-10 overflow-y-scroll;
+}
+
+.select-version {
+  @apply text-center sm:flex justify-center flex-col mx-auto my-auto;
+}
+
+.select-bible-h1 {
+  @apply text-slate-900 dark:text-white sm:text-4xl text-lg font-medium mb-7;
+}
+
+.search {
+  @apply my-9
+}
+
+input[type='search'] {
+  @apply h-16 w-2/3 px-8 placeholder-slate-900 dark:bg-slate-800 outline-none placeholder:text-slate-800 dark:placeholder:text-slate-400 dark:text-white text-slate-800 rounded-lg;
+}
+
+.rows {
+  @apply grid gap-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 mx-auto;
+}
