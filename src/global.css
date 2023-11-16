@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .containers {
-  @apply w-screen bg-slate-200 dark:bg-slate-900 h-screen sm:flex items-center pt-10 overflow-y-scroll;
+  @apply w-screen bg-slate-200 dark:bg-slate-900 h-screen items-center pt-10 overflow-y-scroll;
 }
 
 .select-version {
@@ -15,11 +15,11 @@
 }
 
 .search {
-  @apply my-9
+  @apply flex items-center
 }
 
 input[type='search'] {
-  @apply h-16 w-2/3 px-8 placeholder-slate-900 dark:bg-slate-800 outline-none placeholder:text-slate-800 dark:placeholder:text-slate-400 dark:text-white text-slate-800 rounded-lg;
+  @apply h-16 w-2/3 px-8 placeholder-slate-900 bg-inherit outline-none placeholder:text-slate-800 dark:placeholder:text-slate-400 dark:text-white text-slate-800 rounded-lg;
 }
 
 .rows {

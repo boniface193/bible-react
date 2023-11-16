@@ -1,6 +1,10 @@
+import { Outlet } from "react-router-dom";
+
 const Layout = () => {
   return (
-    <h1>Hello</h1>
+    <section className="containers">
+      <Outlet />
+    </section>
   )
 }
 
