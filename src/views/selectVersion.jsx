@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchBible, getFormValue } from '../redux/reducers/bibleSlice';
 import SelectVersion from '../components/selectVersion';
 import Loading from '../components/loading';
+import { Search } from '../assets/icons';
 
 const SelectVersionFlow = () => {
 
   const dispatch = useDispatch();
   const [formValue, setFormValue] = useState({ searchValue: '' });
 
-  const { data, loading, status } = useSelector((state) => state.bibleReducer);
+  const { searchedBible, loading, status } = useSelector((state) => state.bibleReducer);
 
   useEffect(() => {
     dispatch(fetchBible())
@@ -27,8 +28,6 @@ const SelectVersionFlow = () => {
       dispatch(getFormValue(
         toLowerCaseText,
       ));
-    } else {
-      dispatch(fetchBible());
     }
     setFormValue({ searchValue: '' });
   };
@@ -40,18 +39,17 @@ const SelectVersionFlow = () => {
   }
 
   return (
-    <section className="containers">
-      <aside className="select-version container">
-        <h1 className="select-bible-h1">Select Bible</h1>
-        <form onSubmit={getValue} className='search'>
-          <input type="search" role="search" name="searchValue" placeholder="Search bible, pages, verses... " onChange={handleChange} />
-        </form>
-        <p>{status}</p>
-        <div className="rows">
-          {data.map((items) => (<SelectVersion key={items.id} id={items.id} name={items.name} language={items.language.name} abbreviationLocal={items.abbreviationLocal}></SelectVersion>))}
-        </div>
-      </aside>
-    </section>
+    <aside className="select-version container">
+      <h1 className="select-bible-h1">Select Bible</h1>
+      <form onSubmit={getValue} className='search my-9 justify-center'>
+        <Search />
+        <input type="search" role="search" name="searchValue" placeholder="Search by language translation " onChange={handleChange} />
+      </form>
+      <p className='dark:text-slate-200'>{status}</p>
+      <div className="rows">
+        {searchedBible.map((items) => (<SelectVersion key={items.id} id={items.id} name={items.name} language={items.language.name} abbreviationLocal={items.abbreviationLocal}></SelectVersion>))}
+      </div>
+    </aside>
   );
 };
 
