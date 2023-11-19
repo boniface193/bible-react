@@ -1,100 +1,61 @@
 import { useState } from "react";
-import { Link, Outlet, useLocation } from "react-router-dom";
-import { Home, Schedule, Account, FileManager, Group, Close, Search, Bell, User, Book, OutlinedHome, OutlinedSchedule, OutlinedAccount, OutlinedFileManager, OutlinedGroup, OutlinedClose, OutlinedBook } from "../assets/icons.jsx";
-import Logo from "../assets/logo.svg";
+import { Outlet } from "react-router-dom";
+import { Search, Bell, User } from "../assets/icons.jsx";
+import SearchBar from "../views/searchbar.jsx";
+import ToggleMode from "../components/toggleMode.jsx";
+import SideBar from "../components/sidebar.jsx";
 
 const Dashboard = () => {
-  const getCurrentLocation = useLocation()
-  const [isEnlarge, setEnlarge] = useState(true);
-  const [selected, setSelected] = useState(getCurrentLocation.pathname);
-
+  const [searchValue, setSearchValue] = useState("")
 
   const handleChange = (e) => {
+    setSearchValue(e.target.value)
   };
 
   const getValue = (e) => {
     e.preventDefault();
-  };
+    const saveToStorage = []
+    const retriveStoredData = JSON.parse(localStorage.getItem('searchResult'));
 
-  let nav = [
-    {
-      icon: <Home />,
-      selectedIcon: <OutlinedHome />,
-      text: "Dashboard",
-      route: "/"
-    },
-    {
-      icon: <Book />,
-      selectedIcon: <OutlinedBook />,
-      text: "Book",
-      route: "/book"
-    },
-    {
-      icon: <Schedule />,
-      selectedIcon: <OutlinedSchedule />,
-      text: "Schedules",
-      route: "/schedule"
-    },
-    {
-      icon: <Account />,
-      selectedIcon: <OutlinedAccount />,
-      text: "Acount Manager",
-      route: "/account"
-    },
-    {
-      icon: <FileManager />,
-      selectedIcon: <OutlinedFileManager />,
-      text: "File Manager",
-      route: "/filemanager"
-    },
-    {
-      icon: <Group />,
-      selectedIcon: <OutlinedGroup />,
-      text: "Group Manager",
-      route: "/group"
+    console.log(searchValue)
+    if (searchValue !== '') {
+      const toLowerCases = searchValue.toLowerCase()
+      if (retriveStoredData) {
+        retriveStoredData.push({ name: toLowerCases })
+        localStorage.setItem('searchResult', JSON.stringify(retriveStoredData));
+      } else {
+        saveToStorage.push({ name: toLowerCases })
+        localStorage.setItem('searchResult', JSON.stringify(saveToStorage));
+      }
+      document.querySelector('.search').reset()
+      setSearchValue("")
     }
-  ];
-
-  let enlarge = {
-    decrease: <Close />,
-    enlarge: <OutlinedClose />,
-    text: "Group Manager"
   };
 
   return (
     <section className="justify-self-center flex justify-center items-center dark:bg-slate-800 bg-white rounded-lg p-3 ring-1 ring-slate-900/5 space-y-4 mx-auto sm:w-11/12 text-slate-900 dark:text-gray-400">
       <aside className="bg-slate-200 dark:bg-slate-900 w-full overflow-y-scrol flex overflow-x-clip">
-        <header className={`h-[90vh] inline-flex flex-col justify-between shadow sm:p-6 p-2 ${isEnlarge ? 'md:w-[25rem] w-[35rem]' : ''}`}>
-          <aside className="flex space-x-3 items-center">
-            <img src={Logo} alt="logo" className="h-14 w-14 p-1 bg-gray-100 rounded-lg border border-solid border-gray-200 hover:border-gray-300" onClick={() => setEnlarge(!isEnlarge)} />
-            <span className="font-medium text-3xl select-none">{isEnlarge ? "Bible" : ""}</span>
-          </aside>
 
-          <nav className="inline-flex flex-col space-y-2">
-            {nav.map((link, index) => (
-              <Link key={index} to={link.route} className={`flex items-center py-2 cursor-pointer hover:bg-gray-100 ${isEnlarge ? 'pl-2 pr-6 rounded-lg w-[13rem]' : 'justify-center rounded-full w-12'} ${selected === link.route ? 'bg-blue-100 text-blue-600' : ''}`} onClick={() => setSelected(link.route)}>
-                <span className={`w-8 h-8 p-1 ${isEnlarge ? 'mr-4' : ''}`}> {selected === link.route ? link.selectedIcon : link.icon}</span>
-                <span className="font-medium select-none">{isEnlarge ? link.text : ''}</span>
-              </Link>
-            ))}
-          </nav>
-          <button className="h-8 w-8 p-1 bg-gray-100 text-gray-600 rounded-lg border border-solid border-gray-200 hover:border-gray-300" onClick={() => setEnlarge(!isEnlarge)}>
-            <span>{isEnlarge ? enlarge.decrease : enlarge.enlarge}</span>
-          </button>
-        </header>
+        <SideBar />
         <section className="w-screen sm:px-10 px-5 sm:space-y-0 space-y-28">
-          <aside className="sm:flex justify-between items-center sm:my-8 h-8 w-4/5">
-            <form onSubmit={getValue} className='search sm:w-3/4 w-screen'>
+          <aside className="sm:flex justify-between items-center sm:my-8 h-8 lg:w-auto w-9/12">
+
+            <form onSubmit={getValue} className='search sm:w-full w-screen peer/search'>
               <Search />
-              <input type="search" role="search" name="searchValue" placeholder="Search by language translation " onChange={handleChange} />
+              <input type="search" role="search" name="searchvalue" placeholder="Search by language translation" autoComplete="off" onChange={handleChange} />
             </form>
-            <div className="flex items-center space-x-1">
+            <section className="z-50 absolute peer-focus-within/search:block top-24 searchBar lg:text-lg md:text-sm text-xs transition peer-hover/search:translate-y-5 translate-y-0 hidden duration-500 ease-in-out peer-hover/search:transform">
+              <SearchBar />
+            </section>
+
+            <div className="flex items-center space-x-1 justify-between ">
               <User />
               <span className="truncate sm:w-28 w-3/6">Alexanda Joe</span>
               <Bell />
+              <ToggleMode />
             </div>
           </aside>
-          
+
           <Outlet />
         </section>
       </aside >

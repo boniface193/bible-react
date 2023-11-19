@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  width: 4px;
+}
+
 .containers {
   @apply w-screen bg-slate-200 dark:bg-slate-900 h-screen items-center pt-10 overflow-y-scroll;
 }
@@ -24,4 +28,16 @@ input[type='search'] {
 
 .rows {
   @apply grid gap-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 mx-auto;
+}
+
+.clamps {
+  width: clamp(200px, 75%, 480px);
+}
+
+.format-all p:nth-child(2) {
+  @apply text-2xl my-4
+}
+
+.format-all span {
+  @apply sm:text-3xl text-xl mr-1
 }

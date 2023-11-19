@@ -27,7 +27,7 @@ const Book = () => {
 
   const handleRight = () => {
     const slidesContainer = document.querySelector(".slides-container");
-    const slide = slidesContainer.scrollLeft += 1
+    const slide = slidesContainer.scrollLeft += 1;
     if (slide === 10528) {
       setRight(false)
       setLeft(true)
@@ -52,10 +52,9 @@ const Book = () => {
         </aside>
       </section>
 
-      <section className="slides-container space-x-4 flex mx-auto items-center snap-mandatory overflow-hidden overflow-x-auto scroll-smooth">
-        {data.map((item) => (<SelectCard key={item.id} items={item} />))}
+      <section className="slides-container space-x-4 flex mx-auto w-[54rem] items-center snap-mandatory overflow-x-scroll scroll-smooth">
+        {data.map((item) => (<SelectCard key={item.id} items={item} width={'w-52'} classes={'dark:bg-slate-800 bg-white'} />))}
       </section>
-
     </aside>
   </section>
 };
