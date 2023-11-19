@@ -26,9 +26,9 @@ function App() {
               path: '/book', name: "Book", element: <Book />,
             },
             {
-              path: '/chapters', name: 'chaptersid', element: <ChapterLayout />, children: [
+              path: "/chapters", element: <ChapterLayout />, children: [
                 { path: '', name: 'chapters', element: <Chapters /> },
-                { path: ':id', name: 'chapters', element: <Verses /> },
+                { path: ':id', name: 'chaptersid', element: <Verses /> },
               ]
             },
           ]

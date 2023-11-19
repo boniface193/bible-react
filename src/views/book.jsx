@@ -53,7 +53,7 @@ const Book = () => {
       </section>
 
       <section className="slides-container space-x-4 flex mx-auto w-[54rem] items-center snap-mandatory overflow-x-scroll scroll-smooth">
-        {data.map((item) => (<SelectCard key={item.id} items={item} width={'w-52'} classes={'dark:bg-slate-800 bg-white'} />))}
+        {data.map((item) => (<SelectCard key={item.id} items={item} width={'sm:w-52 w-44'} classes={'dark:bg-slate-800 bg-white'} />))}
       </section>
     </aside>
   </section>

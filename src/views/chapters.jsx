@@ -16,10 +16,10 @@ const Chapters = () => {
   }
   return <section>
     <h1 className="sm:text-3xl text-xl font-medium font-mono capitalize">{name}</h1>
-    <div className="pt-20">
-      <aside className="h-96 items-center justify-center overflow-y-scroll clamps flex border border-solid border-slate-400 p-4 rounded-lg sm:mx-auto flex-wrap">
+    <div className="sm:pt-20 pt-5">
+      <aside className="h-96 justify-center overflow-y-scroll clamps flex border border-solid border-slate-400 sm:p-2 rounded-lg sm:mx-auto flex-wrap">
         {data.map((items) => (
-          <Link to={items.id} onClick={() => localStorage.setItem('chapter', JSON.stringify({id: items.id}))} key={items.id} className="w-14 h-10 m-3 bg-slate-400 hover:bg-blue-500 cursor-pointer justify-center text-xl font-mono flex items-center rounded-lg text-white">
+          <Link to={items.id} onClick={() => localStorage.setItem('chapter', JSON.stringify({ id: items.id }))} key={items.id} className="sm:w-14 w-12 h-10 m-2 bg-slate-400 hover:bg-blue-500 cursor-pointer justify-center sm:text-lg text-sm font-mono flex items-center rounded-lg text-white">
             {items.number}
           </Link>
         ))}
