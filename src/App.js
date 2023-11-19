@@ -5,6 +5,9 @@ import Index from './views/home';
 import Layout from './layouts/layout';
 import Dashboard from './layouts/dashboard';
 import Book from './views/book';
+import Chapters from './views/chapters';
+import ChapterLayout from './layouts/chapterLayout';
+import Verses from './views/verses';
 
 
 function App() {
@@ -19,7 +22,15 @@ function App() {
           element: isSelected ? <Dashboard /> : <SelectVersionFlow />,
           children: [
             { path: '/', name: "home", element: <Index />, Index: true, },
-            { path: '/book', name: "Book", element: <Book /> },
+            {
+              path: '/book', name: "Book", element: <Book />,
+            },
+            {
+              path: '/chapters', name: 'chaptersid', element: <ChapterLayout />, children: [
+                { path: '', name: 'chapters', element: <Chapters /> },
+                { path: ':id', name: 'chapters', element: <Verses /> },
+              ]
+            },
           ]
         },
         {
