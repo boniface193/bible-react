@@ -37,8 +37,11 @@ const Book = () => {
     }
   };
 
-  return <section >
-    <span className='sm:text-xl text-xl font-mono capitalize text-red-600'>{status}</span>
+  if (status) {
+    return <span className='flex justify-center py-20 sm:text-xl text-xl font-mono capitalize text-red-600'>{status}</span>
+  }
+
+  return <section>
     <h1 className="sm:text-3xl text-xl font-medium font-mono capitalize">Keep The Story going</h1>
     <p className="text-sm font-medium my-5 sm:w-1/2 w-4/5">{showRandomText}</p>
 
@@ -52,8 +55,8 @@ const Book = () => {
         </aside>
       </section>
 
-      <section className="slides-container space-x-4 flex mx-auto w-[54rem] items-center snap-mandatory overflow-x-scroll scroll-smooth">
-        {data.map((item) => (<SelectCard key={item.id} items={item} width={'sm:w-52 w-44'} classes={'dark:bg-slate-800 bg-white'} />))}
+      <section className="slides-container space-x-4 flex mx-auto w-[52rem] items-center snap-mandatory overflow-x-scroll scroll-smooth">
+        {data.map((item) => (<SelectCard key={item.id} items={item} width={'sm:w-52 w-40'} classes={'dark:bg-slate-800 bg-white'} />))}
       </section>
     </aside>
   </section>

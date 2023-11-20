@@ -44,10 +44,7 @@ const chapterSlice = createSlice({
       state.status = ''
       state.loading = true;
     }).addCase(fetchChapterByID.fulfilled, (state, { payload }) => {
-      const { data } = payload;
-      // const { content } = data;
-      console.log(data)
-      
+      const { data } = payload;      
       state.chapter = data;
       state.loading = false;
     }).addCase(fetchChapterByID.rejected, (state) => {
