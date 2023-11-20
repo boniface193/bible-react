@@ -41,3 +41,21 @@ input[type='search'] {
 .format-all span {
   @apply sm:text-3xl text-xl mr-1
 }
+table tr th {
+  @apply font-semibold;
+}
+table tr td:nth-child(3) {
+  @apply bg-slate-300 dark:bg-slate-800 rounded-b-xl;
+}
+
+table tr th:nth-child(1) {
+  @apply text-red-400;
+}
+
+table tr td:nth-child(1) {
+  @apply text-red-400 rounded-b-xl;
+}
+
+table tr th:nth-child(3) {
+  @apply bg-slate-300 dark:bg-slate-800 rounded-t-xl;
+}

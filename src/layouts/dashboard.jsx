@@ -4,8 +4,11 @@ import { Search, Bell, User } from "../assets/icons.jsx";
 import SearchBar from "../views/searchbar.jsx";
 import ToggleMode from "../components/toggleMode.jsx";
 import SideBar from "../components/sidebar.jsx";
+import { fetchSearch } from "../redux/reducers/searchSlice.js"
+import { useDispatch } from "react-redux";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("")
 
   const handleChange = (e) => {
@@ -14,10 +17,9 @@ const Dashboard = () => {
 
   const getValue = (e) => {
     e.preventDefault();
-    const saveToStorage = []
+    const saveToStorage = [];
     const retriveStoredData = JSON.parse(localStorage.getItem('searchResult'));
 
-    console.log(searchValue)
     if (searchValue !== '') {
       const toLowerCases = searchValue.toLowerCase()
       if (retriveStoredData) {
@@ -27,6 +29,7 @@ const Dashboard = () => {
         saveToStorage.push({ name: toLowerCases })
         localStorage.setItem('searchResult', JSON.stringify(saveToStorage));
       }
+      dispatch(fetchSearch(toLowerCases));
       document.querySelector('.search').reset()
       setSearchValue("")
     }
