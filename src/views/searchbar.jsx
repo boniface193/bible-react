@@ -64,7 +64,7 @@ const SearchBar = () => {
             ))}
           </ul>
         </div>
-        <div className="overflow-hidden">
+        <div className="overflow-x-auto">
           <p
             className="uppercase text-slate-500 tracking-wider font-medium text-[13px]"
           >
@@ -82,17 +82,17 @@ const SearchBar = () => {
             {data.map((item) => (<SelectCard key={item.id} items={item} width={'w-32'} classes={'drop-shadow-xl dark:bg-slate-900 bg-white'} />))}
           </section>
         </div>
-        <div>
+        <div className="overflow-x-auto w-full">
           <p
             className="uppercase text-slate-500 tracking-wider font-medium text-[13px]"
           >
             Key words
           </p>
-          <section className=" overflow-x-hidden">
-            <ul className="flex space-x-2 my-2">
+          <section className="py-2">
+            <ul className="flex space-x-2">
               {retriveStoredData.map((items, index) => (
-                <li key={index}>
-                  <span className="bg-gray-300 text-slate-900 font-medium p-4 py-1 rounded-md flex-wrap">{items.name}</span>
+                <li key={index} className=" text-slate-900 font-medium">
+                  <span className="bg-gray-300 px-4 py-1 rounded-md"> {items.name}</span>
                 </li>
               ))}
             </ul>

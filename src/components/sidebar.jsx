@@ -25,25 +25,25 @@ const SideBar = () => {
       icon: <Schedule />,
       selectedIcon: <OutlinedSchedule />,
       text: "Schedules",
-      route: "/schedule"
+      route: "."
     },
     {
       icon: <Account />,
       selectedIcon: <OutlinedAccount />,
       text: "Acount Manager",
-      route: "/account"
+      route: " "
     },
     {
       icon: <FileManager />,
       selectedIcon: <OutlinedFileManager />,
       text: "File Manager",
-      route: "/filemanager"
+      route: ""
     },
     {
       icon: <Group />,
       selectedIcon: <OutlinedGroup />,
       text: "Group Manager",
-      route: "/group"
+      route: "   "
     }
   ];
 

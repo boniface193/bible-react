@@ -40,7 +40,7 @@ const SelectVersionFlow = () => {
 
   return (
     <aside className="select-version container">
-      <h1 className="select-bible-h1">Select Bible</h1>
+      <h1 className="select-bible-h1">Select Your Bible Version</h1>
       <form onSubmit={getValue} className='search my-9 justify-center'>
         <Search />
         <input type="search" role="search" name="searchValue" placeholder="Search by language translation " onChange={handleChange} />
