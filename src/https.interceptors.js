@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const AUTH_TOKEN = process.env.REACT_APP_API_KEY1;
+const AUTH_TOKEN = process.env.REACT_APP_API_KEY;
 axios.defaults.baseURL = 'https://api.scripture.api.bible';
 axios.defaults.headers.common['api-key'] = AUTH_TOKEN;
 axios.defaults.timeout = 6000;

@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../../https.interceptors';
 
 export const fetchSearch = createAsyncThunk('bible/fetchSearch', async (params) => {
-  console.log(params)
   const { id } = JSON.parse(localStorage.getItem('data'));
   const res = await axios.get(`/v1/bibles/${id}/search?query=${params}&sort=relevance`);
   return res.data
@@ -12,7 +11,6 @@ const searchSlice = createSlice({
   name: 'getSearch',
   initialState: {
     data: [],
-    searchedBible: [],
     status: '',
     loading: true,
   },
@@ -25,7 +23,6 @@ const searchSlice = createSlice({
       })
       .addCase(fetchSearch.fulfilled, (state, { payload }) => {
         state.data = payload.data;
-        state.searchedBible = state.data;
         state.loading = false;
       })
       .addCase(fetchSearch.rejected, (state) => {
@@ -35,4 +32,3 @@ const searchSlice = createSlice({
 })
 
 export default searchSlice.reducer;
-export const { getFormValue } = searchSlice.actions;

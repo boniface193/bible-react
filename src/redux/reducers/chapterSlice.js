@@ -9,7 +9,6 @@ export const fetchChapter = createAsyncThunk('book/fetchChapter', async () => {
 });
 
 export const fetchChapterByID = createAsyncThunk('book/fetchChapterByID', async (setNextPage) => {
-
   const { id } = JSON.parse(localStorage.getItem('data'));
   const chapterid = Object.keys(setNextPage).length === 0 ? JSON.parse(localStorage.getItem('chapter')) : setNextPage;
   const res = await axios.get(`/v1/bibles/${id}/chapters/${chapterid.id}?content-type=html&include-notes=false&include-titles=true&include-chapter-numbers=true&include-verse-numbers=true&include-verse-spans=false`);
@@ -44,7 +43,7 @@ const chapterSlice = createSlice({
       state.status = ''
       state.loading = true;
     }).addCase(fetchChapterByID.fulfilled, (state, { payload }) => {
-      const { data } = payload;      
+      const { data } = payload;
       state.chapter = data;
       state.loading = false;
     }).addCase(fetchChapterByID.rejected, (state) => {

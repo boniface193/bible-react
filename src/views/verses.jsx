@@ -1,16 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { fetchChapterByID } from '../redux/reducers/chapterSlice';
 import { ArrowDown, ArrowUp, Linkedin, Twitter, WellFound } from "../assets/icons";
 
 const Verses = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { chapter, status } = useSelector((state) => state.chapterReducer);
   const [nextPage, setNextPage] = useState({});
 
   useEffect(() => {
     dispatch(fetchChapterByID(nextPage))
   }, [dispatch, nextPage]);
+
+
+  const changeToNextPage = (params) => {
+    navigate(`/chapters/${params.id}`)
+    setNextPage(params)
+  }
 
   if (status) {
     return <span className='flex justify-center py-20 sm:text-xl text-xl font-mono capitalize text-red-600'>{status}</span>
@@ -19,10 +27,10 @@ const Verses = () => {
     <aside className="space-y-8 md:space-x-8 flex lg:flex-col md:flex-row flex-col w-full lg:w-2/5">
       <aside className="flex justify-around items-center space-x-3 sm:w-80 w-3/4">
         <div className="space-y-5">
-          <div className="border border-slate-300 w-10 text-slate-500 h-10 flex items-center justify-center rounded-full cursor-pointer" onClick={() => setNextPage(chapter.next)}>
+          <div className="border border-slate-300 w-10 text-slate-500 h-10 flex items-center justify-center rounded-full cursor-pointer" onClick={() => changeToNextPage(chapter.next)}>
             <ArrowUp />
           </div>
-          <div className="border border-slate-300 w-10 text-slate-500 h-10 flex items-center justify-center rounded-full cursor-pointer" onClick={() => setNextPage(chapter.previous)}>
+          <div className="border border-slate-300 w-10 text-slate-500 h-10 flex items-center justify-center rounded-full cursor-pointer" onClick={() => changeToNextPage(chapter.previous)}>
             <ArrowDown />
           </div>
         </div>

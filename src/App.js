@@ -8,6 +8,7 @@ import Book from './views/book';
 import Chapters from './views/chapters';
 import ChapterLayout from './layouts/chapterLayout';
 import Verses from './views/verses';
+import SearchResult from './views/searchResult';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
                 { path: ':id', name: 'chaptersid', element: <Verses /> },
               ]
             },
+            { path: "/search", name: "search", element: <SearchResult /> }
           ]
         },
         {

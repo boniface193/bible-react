@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Search, Bell, User } from "../assets/icons.jsx";
 import SearchBar from "../views/searchbar.jsx";
 import ToggleMode from "../components/toggleMode.jsx";
@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState("")
 
   const handleChange = (e) => {
@@ -21,7 +22,7 @@ const Dashboard = () => {
     const retriveStoredData = JSON.parse(localStorage.getItem('searchResult'));
 
     if (searchValue !== '') {
-      const toLowerCases = searchValue.toLowerCase()
+      const toLowerCases = searchValue.toLowerCase().trim()
       if (retriveStoredData) {
         retriveStoredData.push({ name: toLowerCases })
         localStorage.setItem('searchResult', JSON.stringify(retriveStoredData));
@@ -32,6 +33,7 @@ const Dashboard = () => {
       dispatch(fetchSearch(toLowerCases));
       document.querySelector('.search').reset()
       setSearchValue("")
+      navigate('/search')
     }
   };
 
@@ -47,7 +49,8 @@ const Dashboard = () => {
               <Search />
               <input type="search" role="search" name="searchvalue" placeholder="Search by language translation" autoComplete="off" onChange={handleChange} />
             </form>
-            <section className="z-50 absolute peer-focus-within/search:block top-24 searchBar lg:text-lg md:text-sm text-xs transition peer-hover/search:translate-y-5 translate-y-0 hidden duration-500 ease-in-out peer-hover/search:transform">
+
+            <section id="openBar" className="z-50 absolute peer-focus-within/search:block top-24 searchBar lg:text-lg md:text-sm text-xs transition peer-hover/search:translate-y-5 translate-y-0 hidden duration-500 ease-in-out peer-hover/search:transform">
               <SearchBar />
             </section>
 
